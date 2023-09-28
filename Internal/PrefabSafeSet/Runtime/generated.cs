@@ -5,7 +5,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using JetBrains.Annotations;
 using UnityEngine;
+
+#if AAO_VRCSDK3_AVATARS
 using VRC.Dynamics;
+#endif
+
 using Object = UnityEngine.Object;
 
 namespace Anatawa12.AvatarOptimizer.PrefabSafeSet
@@ -46,6 +50,8 @@ namespace Anatawa12.AvatarOptimizer.PrefabSafeSet
         [Serializable]
         public class Layer : PrefabLayer<String>{}
     }
+
+#if AAO_VRCSDK3_AVATARS
     [Serializable]
     public class VRCPhysBoneBaseSet : PrefabSafeSet<VRCPhysBoneBase, VRCPhysBoneBaseSet.Layer>
     {
@@ -55,6 +61,8 @@ namespace Anatawa12.AvatarOptimizer.PrefabSafeSet
         [Serializable]
         public class Layer : PrefabLayer<VRCPhysBoneBase>{}
     }
+#endif
+
     [Serializable]
     public class TransformSet : PrefabSafeSet<Transform, TransformSet.Layer>
     {

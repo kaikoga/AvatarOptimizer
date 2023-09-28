@@ -4,7 +4,13 @@ using JetBrains.Annotations;
 using nadena.dev.ndmf;
 using UnityEditor;
 using UnityEngine;
+
+#if AAO_VRCSDK3_AVATARS
 using VRC.SDK3.Avatars.Components;
+#else
+using VRCAvatarDescriptor = UnityEngine.Animator;
+#endif
+
 using Object = UnityEngine.Object;
 
 namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes

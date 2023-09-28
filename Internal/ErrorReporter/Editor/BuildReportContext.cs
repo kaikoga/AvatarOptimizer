@@ -17,7 +17,7 @@ namespace Anatawa12.AvatarOptimizer.ErrorReporting
         public void OnActivate(BuildContext context)
         {
             var state = context.GetState<BuildReportSharedState>();
-            var descriptor = context.AvatarDescriptor;
+            var descriptor = context.AvatarRootTransform;
             if (descriptor == null) throw new Exception();
             var report = state.Report;
             if (state.Report == null)

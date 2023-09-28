@@ -6,7 +6,9 @@ using nadena.dev.ndmf;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
+#if AAO_VRCSDK3_AVATARS
 using VRC.SDK3.Avatars.Components;
+#endif
 using Object = UnityEngine.Object;
 
 namespace Anatawa12.AvatarOptimizer
@@ -60,10 +62,13 @@ namespace Anatawa12.AvatarOptimizer
         public static void Apply(Type type, SerializedObject serialized, 
             ObjectMapping mapping, ref AnimatorControllerMapper mapper)
         {
+#if AAO_VRCSDK3_AVATARS
             if (type.IsAssignableFrom(typeof(VRCAvatarDescriptor)))
                 VRCAvatarDescriptor(serialized, mapping, ref mapper);
+#endif
         }
         
+#if AAO_VRCSDK3_AVATARS
         // customEyeLookSettings.eyelidsBlendshapes is index
         private static void VRCAvatarDescriptor(SerializedObject serialized,
             ObjectMapping mapping, ref AnimatorControllerMapper mapper)
@@ -98,6 +103,7 @@ namespace Anatawa12.AvatarOptimizer
                 }
             }
         }
+#endif
     }
 
     internal class AnimatorControllerMapper

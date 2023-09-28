@@ -4,16 +4,23 @@ using Anatawa12.AvatarOptimizer.ErrorReporting;
 using CustomLocalization4EditorExtension;
 using JetBrains.Annotations;
 using UnityEngine;
+#if AAO_VRCSDK3_AVATARS
 using VRC.Dynamics;
+#endif
 
 namespace Anatawa12.AvatarOptimizer
 {
+#if AAO_VRCSDK3_AVATARS
     [AddComponentMenu("Avatar Optimizer/AAO Merge PhysBone")]
+#endif
     [DisallowMultipleComponent]
     [ExecuteAlways]
     [HelpURL("https://vpm.anatawa12.com/avatar-optimizer/ja/docs/reference/merge-physbone/")]
     internal class MergePhysBone : AvatarTagComponent, IStaticValidated
     {
+
+#if AAO_VRCSDK3_AVATARS
+
         [CL4EELocalized("MergePhysBone:prop:makeParent", "MergePhysBone:tooltip:makeParent")]
         public bool makeParent;
 
@@ -233,6 +240,7 @@ namespace Anatawa12.AvatarOptimizer
         {
             componentsSet = new PrefabSafeSet.VRCPhysBoneBaseSet(this);
         }
+#endif
     }
 
     internal enum CollidersSettings

@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
-using VRC.SDK3.Avatars.Components;
 using Object = UnityEngine.Object;
 
 namespace Anatawa12.AvatarOptimizer.ErrorReporting
@@ -31,8 +30,8 @@ namespace Anatawa12.AvatarOptimizer.ErrorReporting
 
         [SerializeField] internal List<AvatarReport> avatars = new List<AvatarReport>();
 
-        internal ConditionalWeakTable<VRCAvatarDescriptor, AvatarReport> AvatarsByObject =
-            new ConditionalWeakTable<VRCAvatarDescriptor, AvatarReport>();
+        internal ConditionalWeakTable<Transform, AvatarReport> AvatarsByObject =
+            new ConditionalWeakTable<Transform, AvatarReport>();
         internal AvatarReport CurrentAvatar { get; set; }
 
         internal static BuildReport CurrentReport
@@ -81,7 +80,7 @@ namespace Anatawa12.AvatarOptimizer.ErrorReporting
             ErrorReportUI.ReloadErrorReport();
         }
 
-        internal AvatarReport Initialize([NotNull] VRCAvatarDescriptor descriptor)
+        internal AvatarReport Initialize([NotNull] Transform descriptor)
         {
             if (descriptor == null) throw new ArgumentNullException(nameof(descriptor));
 

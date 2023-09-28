@@ -2,8 +2,12 @@ using Anatawa12.AvatarOptimizer.ErrorReporting;
 using CustomLocalization4EditorExtension;
 using UnityEditor;
 using UnityEngine;
-using VRC.Core;
+
+#if AAO_VRCSDK3_AVATARS
 using VRC.SDK3.Avatars.Components;
+#else
+using VRCAvatarDescriptor = UnityEngine.Animator;
+#endif
 
 namespace Anatawa12.AvatarOptimizer
 {
