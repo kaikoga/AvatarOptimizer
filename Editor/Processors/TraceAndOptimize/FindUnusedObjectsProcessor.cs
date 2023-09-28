@@ -112,7 +112,9 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
                 case OcclusionArea _:
                 case OcclusionPortal _:
                 case ParticleSystem _:
+#if !UNITY_2021_3_OR_NEWER
                 case ParticleSystemForceField _:
+#endif
                 case Rigidbody _:
                 case Rigidbody2D _:
                 case TextMesh _:
