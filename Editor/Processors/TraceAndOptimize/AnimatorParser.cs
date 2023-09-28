@@ -9,9 +9,12 @@ using nadena.dev.ndmf;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Animations;
+
+#if AAO_VRCSDK3_AVATARS
 using VRC.Dynamics;
 using VRC.SDK3.Avatars.Components;
 using VRC.SDKBase;
+#endif
 
 namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
 {
@@ -170,13 +173,15 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
         private IModificationsContainer CollectAvatarRootAnimatorModifications(BuildContext session)
         {
             var animator = session.AvatarRootObject.GetComponent<Animator>();
+#if AAO_VRCSDK3_AVATARS
             var descriptor = session.AvatarRootObject.GetComponent<VRCAvatarDescriptor>();
-
+#endif
             var modificationsContainer = new ModificationsContainer();
 
             if (animator)
                 modificationsContainer = AddHumanoidModifications(modificationsContainer, animator).ToMutable();
 
+#if AAO_VRCSDK3_AVATARS
             // process playable layers
             // see https://misskey.niri.la/notes/9ioemawdit
             // see https://creators.vrchat.com/avatars/playable-layers
@@ -315,8 +320,9 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
                         break;
                 }
             }
+#endif
 
-            var bodySkinnedMesh = descriptor.transform.Find("Body")?.GetComponent<SkinnedMeshRenderer>();
+            var bodySkinnedMesh = session.AvatarRootTransform.Find("Body")?.GetComponent<SkinnedMeshRenderer>();
 
             if (mmdWorldCompatibility && bodySkinnedMesh)
             {
@@ -329,6 +335,7 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
             return modificationsContainer;
         }
 
+#if AAO_VRCSDK3_AVATARS
         private void CollectWeightChangesInController(RuntimeAnimatorController runtimeController,
             AnimatorLayerMap<AnimatorWeightState> playableWeightChanged,
             AnimatorLayerMap<AnimatorLayerWeightMap<int>> animatorLayerWeightChanged)
@@ -430,7 +437,8 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
                 throw new InvalidOperationException($"default controller for {layer.type} not found");
             return controller;
         }
-        
+#endif
+
         #endregion
 
         #region Animator
@@ -612,6 +620,7 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
         private static readonly string[] TransformScaleAnimationKeys =
             { "m_LocalScale.x", "m_LocalScale.y", "m_LocalScale.z" };
 
+#if AAO_VRCSDK3_AVATARS
         private static readonly AnimatorLayerMap<CachedGuidLoader<AnimatorController>> DefaultLayers =
             new AnimatorLayerMap<CachedGuidLoader<AnimatorController>>
             {
@@ -632,6 +641,7 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
                 // vrc_AvatarV3UtilityIKPose
                 [VRCAvatarDescriptor.AnimLayerType.IKPose] = "a9b90a833b3486e4b82834c9d1f7c4ee"
             };
+#endif
 
         private static readonly string[] MmdBlendShapeNames = {
             // https://booth.pm/ja/items/3341221
