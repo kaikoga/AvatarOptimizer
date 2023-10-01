@@ -51,4 +51,14 @@ namespace Anatawa12.AvatarOptimizer
             serializedObject.ApplyModifiedProperties();
         }
     }
+    
+    internal abstract class UnsupportedAvatarTagComponentEditor : DefaultAvatarTagComponentEditor
+    {
+        protected override void OnInspectorGUIInner()
+        {
+            EditorGUILayout.HelpBox(CL4EE.GetLocalization()?.TryTr("Unsupported"), MessageType.Error);
+            base.OnInspectorGUIInner();
+        }
+    }
+
 }

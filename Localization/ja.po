@@ -5,6 +5,9 @@ msgstr ""
 msgid "locale:ja"
 msgstr "日本語"
 
+msgid "Unsupported"
+msgstr "未サポート"
+
 msgid "LegacyModularAvatarWarning:message"
 msgstr ""
 "1.7.x以前のModularAvatarがインストールされているようです。\n"

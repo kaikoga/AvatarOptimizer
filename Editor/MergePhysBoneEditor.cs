@@ -660,4 +660,14 @@ namespace Anatawa12.AvatarOptimizer
     }
 }
 
+#else
+
+using UnityEditor;
+
+namespace Anatawa12.AvatarOptimizer
+{
+    [CustomEditor(typeof(MergePhysBone))]
+    internal class MergePhysBoneEditor : UnsupportedAvatarTagComponentEditor { }
+}
+
 #endif
