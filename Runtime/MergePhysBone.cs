@@ -12,6 +12,11 @@ namespace Anatawa12.AvatarOptimizer
 {
 #if AAO_VRCSDK3_AVATARS
     [AddComponentMenu("Avatar Optimizer/AAO Merge PhysBone")]
+#else
+    [AddComponentMenu("Avatar Optimizer/Unsupported/AAO Merge PhysBone (Unsupported)")]
+#endif
+
+#if AAO_VRCSDK3_AVATARS
 #endif
     [DisallowMultipleComponent]
     [ExecuteAlways]
