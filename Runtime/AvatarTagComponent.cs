@@ -1,10 +1,20 @@
-using System;
 using Anatawa12.AvatarOptimizer.ErrorReporting;
 using UnityEngine;
+
+#if AAO_VRCSDK3_AVATARS
 using VRC.SDKBase;
+#endif
 
 namespace Anatawa12.AvatarOptimizer
 {
+#if !AAO_VRCSDK3_AVATARS
+
+    interface IEditorOnly
+    {
+    }
+
+#endif
+
     // https://github.com/bdunderscore/modular-avatar/blob/db49e2e210bc070671af963ff89df853ae4514a5/Packages/nadena.dev.modular-avatar/Runtime/AvatarTagComponent.cs
     // Originally under MIT License
     // Copyright (c) 2022 bd_

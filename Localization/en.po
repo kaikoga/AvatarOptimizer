@@ -2,6 +2,9 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
+msgid "Unsupported"
+msgstr "Unsupported"
+
 msgid "LegacyModularAvatarWarning:message"
 msgstr ""
 "We found Modular Avatar 1.7.x or older is installed!\n"

@@ -5,7 +5,11 @@ using System.Text;
 using nadena.dev.ndmf;
 using UnityEditor;
 using UnityEngine;
+
+#if AAO_VRCSDK3_AVATARS
 using VRC.Dynamics;
+#endif
+
 using Object = UnityEngine.Object;
 
 namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
@@ -112,15 +116,19 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
                 case OcclusionArea _:
                 case OcclusionPortal _:
                 case ParticleSystem _:
+#if !UNITY_2021_3_OR_NEWER
                 case ParticleSystemForceField _:
+#endif
                 case Rigidbody _:
                 case Rigidbody2D _:
                 case TextMesh _:
                 case Tree _:
                 case WindZone _:
+#if AAO_VRCSDK3_AVATARS
                 case UnityEngine.XR.WSA.WorldAnchor _:
                     activeness = true;
                     break;
+#endif
                 case Component _:
                 case null:
                     // fallback: all components type should be proceed with above switch
@@ -506,11 +514,13 @@ namespace Anatawa12.AvatarOptimizer.Processors.TraceAndOptimizes
                         continue;
                     }
 
+#if AAO_VRCSDK3_AVATARS
                     if (component is VRCPhysBoneBase)
                     {
                         foreach (var child in component.GetComponentsInChildren<Transform>(true))
                             AddGameObject(child.gameObject);
                     }
+#endif
 
                     using (var serialized = new SerializedObject(component))
                     {
